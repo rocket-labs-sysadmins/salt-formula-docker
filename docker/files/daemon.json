@@ -6,7 +6,7 @@
   {% do host.update({"experimental": host.experimental}) %}
 {%- endif -%}
 
-{%- if 'insecure-registries' not in host.get('options') and host.insecure_registries is defined %}
+{%- if 'insecure-registries' not in host.get('options', {}) and host.insecure_registries is defined %}
   {% do host.options.update({"insecure-registries": []}) %}
   {%- for srv in host.get('insecure_registries') %}
     {% do host.options['insecure-registries'].append(srv) %}
