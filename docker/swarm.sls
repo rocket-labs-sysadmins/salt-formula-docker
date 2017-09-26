@@ -42,7 +42,7 @@ docker_swarm_init:
         {%- if swarm.get('bind', {}).get('address', None) %} --listen-addr {{ swarm.bind.address }}{% if swarm.bind.port is defined %}:{{ swarm.bind.port }}{% endif %}{%- endif %}
     - unless:
       - "test -e /var/lib/docker/swarm/state.json"
-      - "docker node ls | grep -q '{{ grains.host }}'"
+      - "docker node ls | grep -q '{{ grains.get('host') }}'"
     - require:
       - service: docker_service
 
